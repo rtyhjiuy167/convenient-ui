@@ -7,6 +7,7 @@ import CRadio from './c-radio'
 import CRadioGroup from './c-radio-group'
 import CCheckbox from './c-checkbox'
 import CCheckboxGroup from './c-checkbox-group'
+import CIcon from './c-icon'
 import './icon/iconfont.css'
 
 const components = [
@@ -17,7 +18,8 @@ const components = [
   CRadio,
   CRadioGroup,
   CCheckbox,
-  CCheckboxGroup
+  CCheckboxGroup,
+  CIcon
 ]
 const install = function (Vue) {
   components.forEach(i => {

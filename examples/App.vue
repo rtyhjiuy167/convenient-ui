@@ -39,7 +39,20 @@
       </template>
     </c-dialog>
     <div class="row">
-      <c-input placeholder="请输入内容" v-model="input" clearable type="password" showPassword></c-input>
+      <c-input placeholder="请输入内容" v-model="input" clearable type="password" size="small"></c-input>
+    </div>
+    <div class="row">
+      <c-input placeholder="请输入内容" v-model="input" clearable type="password"></c-input>
+    </div>
+    <div class="row">
+      <c-input placeholder="请输入内容" v-model="input" clearable type="password" size="large"></c-input>
+    </div>
+
+    <div class="row">
+      <c-input placeholder="请输入内容" value="ss" center clearable type="password" showPassword disabled></c-input>
+    </div>
+    <div class="row">
+      <c-input placeholder="请输入内容" v-model="input" type="textarea" size="large"></c-input>
     </div>
     <div class="row">
       <c-switch v-model="isChecked"></c-switch>
@@ -63,6 +76,10 @@
         <c-checkbox label="2"></c-checkbox>
       </c-checkbox-group>
     </div>
+    <div class="row">
+      <c-icon name="close"></c-icon>
+    </div>
+
   </div>
 </template>
 
@@ -70,24 +87,22 @@
 
 
 
+
 export default {
-  name: 'App',
-
-
+  name: "App",
   data() {
     return {
       visible: false,
       input: "",
       isChecked: false,
-      gender: '1',
-      groupGender: '1',
+      gender: "1",
+      groupGender: "1",
       active: false,
       index: ["1"]
-    }
+    };
   },
-  methods: {
+  methods: {},
 
-  }
 }
 </script>
 

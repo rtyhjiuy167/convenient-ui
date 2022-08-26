@@ -37,6 +37,8 @@ icon从 https://www.iconfont.cn/ 官网中获取。
 
 创建项目，将待使用的icon加入到购物车，再从购物车中加入到项目，最后在项目中下载到本地。
 
+引入`iconfont.js`时，由于存在变量赋值给变量本身的语句，`h=h`，`eslint`会报错，需要修改`iconfont.js`文件，`Ctrl+F`搜索`,h=h,`，修改为`,temp=h,h=temp,`，之后在其前面声明变量，即搜索`var c,h=document.createElement("div");`，修改为`var c,h=document.createElement("div");var temp;`
+
 #### 配置
 
 `vue.config.js`配置：

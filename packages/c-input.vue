@@ -1,13 +1,21 @@
 <template>
   <div class="convenient-input" :class="{ 'convenient-input--suffix': showSuffix }">
-    <input class="convenient-input__inner" :class="{ 'is-disabled': disabled }" :placeholder="placeholder"
-      :type="showPassword ? (passwordVisible ? 'text' : 'password') : type" :name="name" :disabled="disabled"
-      :value="value" @input="handleInput">
-    <span class="convenient-input__suffix" v-if="showSuffix">
-      <i class="convenient-input__icon iconfont convenient-icon-error" v-if="clearable && value" @click="clear"></i>
-      <i class="convenient-input__icon iconfont" :class="passwordVisible ? 'convenient-icon-hide' : 'convenient-icon-browse'"
-        v-if="showPassword && type == 'password'" @click="handlePassword"></i>
-    </span>
+    <template v-if="type == 'textarea'">
+      <textarea class="convenient-textarea__inner" :class="styleClass" :placeholder="placeholder" :name="name"
+        :disabled="disabled" :value="value" @input="handleInput" />
+    </template>
+    <template v-else>
+      <input class="convenient-input__inner" :class="styleClass" :placeholder="placeholder"
+        :type="showPassword ? (passwordVisible ? 'text' : 'password') : type" :name="name" :disabled="disabled"
+        :value="value" @input="handleInput">
+      <span class="convenient-input__suffix" v-if="showSuffix">
+        <i class="convenient-input__icon iconfont convenient-icon-error" v-if="clearable && value && !disabled"
+          @click="clear"></i>
+        <i class="convenient-input__icon iconfont"
+          :class="passwordVisible ? 'convenient-icon-hide' : 'convenient-icon-browse'"
+          v-if="showPassword && type == 'password'" @click="handlePassword"></i>
+      </span>
+    </template>
   </div>
 </template>
 
@@ -35,6 +43,13 @@ export default {
       type: String,
       default: ''
     },
+    size: {
+      type: String,
+      default: 'medium',
+      validator: v => {
+        return ['large', 'medium', 'small'].includes(v);
+      }
+    },
     clearable: {
       type: Boolean,
       default: false
@@ -42,7 +57,11 @@ export default {
     showPassword: {
       type: Boolean,
       default: false
-    }
+    },
+    center: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -52,6 +71,13 @@ export default {
   computed: {
     showSuffix() {
       return this.clearable || this.showPassword
+    },
+    styleClass() {
+      return {
+        [`is-${this.size}`]: this.size,
+        "is-disabled": this.disabled,
+        "is-center": this.center,
+      }
     }
   },
   methods: {
@@ -73,10 +99,11 @@ export default {
 .convenient-input {
   width: 100%;
   position: relative;
-  font-size: 14px;
   display: inline-block;
 
-  .convenient-input__inner {
+  .convenient-input__inner,
+  .convenient-textarea__inner {
+
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -86,16 +113,19 @@ export default {
     color: #606266;
     display: inline-block;
     font-size: inherit;
-    height: 40px;
-    line-height: 40px;
     outline: none;
-    padding: 0 15px;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
+
+    padding: 0 15px;
 
     &:focus {
       outline: none;
       border-color: #409eff;
+    }
+
+    &.is-center {
+      text-align: center;
     }
 
     &.is-disabled {
@@ -105,7 +135,35 @@ export default {
       cursor: not-allowed;
     }
 
+    &.is-small {
+      font-size: 12px !important;
+      height: 35px;
+      line-height: 37px;
+      min-height: 35px;
+      min-width: 100%;
+      max-width: 100%;
+    }
+
+    &.is-medium {
+      font-size: 14px !important;
+      height: 43px;
+      line-height: 42px;
+      min-height: 43px;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+    &.is-large {
+      font-size: 15px !important;
+      height: 45px;
+      line-height: 43px;
+      min-height: 45px;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
   }
+
 }
 
 .convenient-input--suffix {
