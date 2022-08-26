@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import MyUI from '../packages'
+import convenientUI from '../packages'
 
 Vue.config.productionTip = false
-Vue.use(MyUI);
+Vue.use(convenientUI);
 new Vue({
   render: h => h(App)
 }).$mount('#app')
