@@ -33,7 +33,7 @@ Vue.use(convenientUI);
 
 #### 图标
 
-icon从https://www.iconfont.cn/ 官网中获取。
+icon从 https://www.iconfont.cn/ 官网中获取。
 
 创建项目，将待使用的icon加入到购物车，再从购物车中加入到项目，最后在项目中下载到本地。
 
