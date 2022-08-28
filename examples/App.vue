@@ -68,6 +68,16 @@
       </c-radio-group>
     </div>
     <div class="row">
+      <c-radio-button label="a" v-model="radioButton" activeColor="black" ></c-radio-button>
+      <c-radio-button label="b" v-model="radioButton"></c-radio-button>
+    </div>
+    <div class="row">
+      <c-radio-group v-model="radioButton" @click="handleClick">
+        <c-radio-button label="a"></c-radio-button>
+        <c-radio-button label="b"></c-radio-button>
+      </c-radio-group>
+    </div>
+    <div class="row">
       <c-checkbox v-model="active">dd</c-checkbox>
     </div>
     <div class="row">
@@ -76,6 +86,7 @@
         <c-checkbox label="2"></c-checkbox>
       </c-checkbox-group>
     </div>
+
     <div class="row">
       <c-icon name="close"></c-icon>
     </div>
@@ -97,11 +108,17 @@ export default {
       isChecked: false,
       gender: "1",
       groupGender: "1",
+      radioButton: 'a',
       active: false,
       index: ["1"]
     };
   },
-  methods: {},
+  methods: {
+    handleClick(val) {
+      console.log(val)
+
+    }
+  },
 
 }
 </script>

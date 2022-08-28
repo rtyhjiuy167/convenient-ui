@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'c-input',
+  name: 'CInput',
   props: {
     placeholder: {
       type: String,

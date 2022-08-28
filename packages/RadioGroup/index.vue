@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'c-radio-group',
+    name: 'CRadioGroup',
     provide() {
         return {
             RadioGroup: this
@@ -14,6 +14,7 @@ export default {
     },
     props: {
         value: null
-    }
+    },
+    
 }
 </script>

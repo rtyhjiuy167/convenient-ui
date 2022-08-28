@@ -7,7 +7,7 @@
                 如果只有 :value ，则由于单向数据流问题，无法进行修改
                 两者都有，则 :value 用于确定值，v-model 用于判断是否选中，同时修改父组件传递的值
             -->
-            <input type="radio" class="convenient-radio__original" :value="label" v-model="model">
+            <input type="radio" class="convenient-radio__original" :value="label" v-model="model" name="name">
         </span>
         <span class="convenient-radio__label">
             <slot>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: 'c-radio',
+    name: 'CRadio',
     props: {
         label: {
             type: [String, Number, Boolean],

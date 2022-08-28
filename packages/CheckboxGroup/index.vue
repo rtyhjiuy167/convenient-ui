@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'c-checkbox-group',
+    name: 'CCheckboxGroup',
     provide() {
         return {
             CheckboxGroup: this

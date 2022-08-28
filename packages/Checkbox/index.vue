@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: "c-checkbox",
+    name: "CCheckbox",
     inject: {
         CheckboxGroup: {
             default: ''

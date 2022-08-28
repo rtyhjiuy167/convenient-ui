@@ -10,7 +10,7 @@
 <script>
 
 export default {
-    name: "c-switch",
+    name: "CSwitch",
     props: {
         value: {
             type: Boolean,
