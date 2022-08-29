@@ -1,6 +1,6 @@
 <template>
     <label class="convenient-checkbox" :class="{ ' is-checked': isChecked }">
-        <span class="convenient-checkbox__nput">
+        <span class="convenient-checkbox__input">
             <span class="convenient-checkbox__inner"></span>
             <input type="checkbox" class="convenient-checkbox__original" :name="name" v-model="model" :value="label">
         </span>
@@ -21,7 +21,7 @@ export default {
     props: {
         value: {
             type: Boolean,
-            default: false
+            default:false
         },
         label: {
             type: String,

@@ -5,7 +5,7 @@
                 <div class="convenient-dialog__header">
                     <slot name="title">
                         <span class="convenient-dialog__title">
-                            {{ title }}
+                            {{  title  }}
                         </span>
                     </slot>
                     <button class="convenient-dialog__headerbtn" @click="handleClose">
@@ -55,14 +55,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.dialog-fade-enter-active {
-    animation: fade .3s;
-}
-
-.dialog-fade-leave-active {
-    animation: fade .3s reverse;
-}
-
 @keyframes fade {
     0% {
         opacity: 0;
@@ -73,6 +65,14 @@ export default {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.dialog-fade-enter-active {
+    animation: fade .3s;
+}
+
+.dialog-fade-leave-active {
+    animation: fade .3s reverse;
 }
 
 .convenient-dialog__wrapper {

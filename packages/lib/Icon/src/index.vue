@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import './iconfont.js'
+import '../iconfont.js'
 export default {
   name: "CIcon",
   props: {
