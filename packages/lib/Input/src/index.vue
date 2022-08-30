@@ -12,7 +12,7 @@
         <i class="convenient-input__icon iconfont convenient-icon-error" v-if="clearable && value && !disabled"
           @click="clear"></i>
         <i class="convenient-input__icon iconfont"
-          :class="passwordVisible ? 'convenient-icon-hide' : 'convenient-icon-browse'"
+          :class="passwordVisible ?   'convenient-icon-browse':'convenient-icon-hide'"
           v-if="showPassword && type == 'password'" @click="handlePassword"></i>
       </span>
     </template>
@@ -103,7 +103,6 @@ export default {
 
   .convenient-input__inner,
   .convenient-textarea__inner {
-
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;

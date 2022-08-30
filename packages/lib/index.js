@@ -11,6 +11,7 @@ import CheckboxGroup from './CheckboxGroup'
 import Icon from './Icon'
 import Carousel from './Carousel'
 import CCarouselItem from './CarouselItem'
+import CMagnifier from './Magnifier'
 import '../iconfont.css'
 
 const components = [
@@ -25,7 +26,8 @@ const components = [
   CheckboxGroup,
   Icon,
   Carousel,
-  CCarouselItem
+  CCarouselItem,
+  CMagnifier
 ];
 const optionsComponentsName = (optionsComponents) => {
   let map = {};

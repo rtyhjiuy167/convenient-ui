@@ -120,7 +120,9 @@ export default {
   mounted() {
     this.updateItems();
     this.$nextTick(() => {
-      this.$refs.carouselDot.style.marginTop = '-' + this.$refs.carouselDot.offsetHeight / 2 + 'px'
+      if (this.hasDot) {
+        this.$refs.carouselDot.style.marginTop = '-' + this.$refs.carouselDot.offsetHeight / 2 + 'px'
+      }
       if (this.autoplay) {
         this.setAutoplay()
       }
@@ -167,6 +169,7 @@ export default {
 
 .carousel-arrow-left-enter-active {
   animation: fadeLeft .2s;
+
 }
 
 .carousel-arrow-left-leave-active {

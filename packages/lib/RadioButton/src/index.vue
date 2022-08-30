@@ -6,11 +6,14 @@
   { 'is-circle': circle },
   { 'is-active': active },
   { 'is-disabled': disabled }]" ref="button">
-    {{ label }}
+
     <i v-if="icon" :class="`iconfont convenient-icon-${icon}`"></i>
     <span v-if="$slots.default">
       <slot />
     </span>
+    <template v-else>
+      {{  label  }}
+    </template>
   </button>
 </template>
 <script>

@@ -4,7 +4,8 @@
     { 'is-plain': plain },
     { 'is-round': round },
     { 'is-circle': circle },
-    { 'is-disabled': disabled }
+    { 'is-disabled': disabled },
+    `${size}`
   ]" @click="handleClick" :disabled="disabled">
     <i v-if="icon" :class="`iconfont convenient-icon-${icon}`"></i>
     <span v-if="$slots.default">
@@ -19,32 +20,38 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'default'
+      default: () => 'default'
+    },
+    size: {
+      type: String,
+      default: () => 'large'
     },
     icon: {
       type: String,
-      default: ''
+      default: () => ''
     },
     plain: {
       type: Boolean,
-      default: false
+      default: () => false
     },
     round: {
       type: Boolean,
-      default: false
+      default: () => false
     },
     circle: {
       type: Boolean,
-      default: false
+      default: () => false
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: () => false
     }
   },
   methods: {
     handleClick(e) {
-      this.$emit('click', e)
+      if (!this.disabled) {
+        this.$emit('click', e)
+      }
     }
   }
 }
@@ -59,6 +66,7 @@ $success-color: #67c23a;
 $success-active-color: #85ce61;
 $danger-color: #f56c6c;
 $danger-active-color: #f78989;
+
 
 .convenient-button {
   display: inline-block;
@@ -79,9 +87,30 @@ $danger-active-color: #f78989;
   -webkit-user-select: none;
   -ms-user-select: none;
 
-  padding: 12px 20px;
-  font-size: 14px;
-  border-radius: 4px;
+
+  &.large {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
+  &.medium {
+    font-size: 12px;
+    padding: 9px 15px;
+    border-radius: 4px;
+  }
+
+  &.small {
+    font-size: 11px;
+    padding: 7.5px 12px;
+    border-radius: 3px;
+  }
+
+  &.mini {
+    font-size: 10px;
+    padding: 6px 10px;
+    border-radius: 3px;
+  }
 
   &:hover {
     color: #409eff;
@@ -108,7 +137,7 @@ $danger-active-color: #f78989;
   background-color: $success-color;
   border-color: $success-color;
 
-  &:hover{
+  &:hover {
     background: $success-active-color;
     background-color: $success-active-color;
     color: #fff;
@@ -120,7 +149,7 @@ $danger-active-color: #f78989;
   background-color: $info-color;
   border-color: $info-color;
 
-  &:hover{
+  &:hover {
     background: $info-active-color;
     background-color: $info-active-color;
     color: #fff;
@@ -146,7 +175,7 @@ $danger-active-color: #f78989;
   background-color: $danger-color;
   border-color: $danger-color;
 
-  &:hover{
+  &:hover {
     background: $danger-active-color;
     background-color: $danger-active-color;
     color: #fff;
@@ -180,7 +209,7 @@ $danger-active-color: #f78989;
   background: #c2e7b0;
   border-color: #c2e7b0;
 
-  &:hover{
+  &:hover {
     background: #67c23a;
     border-color: #67c23a;
     color: #fff;
@@ -192,7 +221,7 @@ $danger-active-color: #f78989;
   background: #f4f4f5;
   border-color: #d3d4d6;
 
-  &:hover{
+  &:hover {
     background: #909399;
     border-color: #909399;
     color: #fff;
@@ -226,16 +255,51 @@ $danger-active-color: #f78989;
 
 .convenient-button.is-round {
   border-radius: 20px;
-  padding: 12px 23px;
+
+
+  &.large {
+    padding: 12px 23px;
+  }
+
+  &.medium {
+    padding: 10px 19px;
+
+  }
+
+  &.small {
+    padding: 8px 15px;
+
+  }
+
+  &.mini {
+    padding: 7px 13px;
+  }
 }
 
 .convenient-button.is-circle {
   border-radius: 50%;
-  padding: 12px;
+
+  &.large {
+    padding: 12px;
+  }
+
+  &.medium {
+    padding: 10px;
+
+  }
+
+  &.small {
+    padding: 8px;
+
+  }
+
+  &.mini {
+    padding: 7px;
+  }
 }
 
 .convenient-button.is-disabled {
   cursor: no-drop;
-  background-color: rgba(148, 146, 146, 0.39);
+  opacity: 0.5;
 }
 </style>

@@ -5,7 +5,7 @@
             <input type="checkbox" class="convenient-checkbox__original" :name="name" v-model="model" :value="label">
         </span>
         <span class="convenient-checkbox__label">
-            <slot> {{ label }}</slot>
+            <slot> {{  label  }}</slot>
         </span>
     </label>
 </template>
@@ -21,7 +21,7 @@ export default {
     props: {
         value: {
             type: Boolean,
-            default:false
+            default: false
         },
         label: {
             type: String,
@@ -87,15 +87,16 @@ export default {
             &:after {
                 box-sizing: content-box;
                 content: '';
-                border: 1px solid #ffffff;
+                border: 1px solid #fff;
                 border-left: 0;
                 border-top: 0;
                 height: 7px;
-                left: 4px;
-                position: absolute;
-                top: 1px;
-                transform: rotate(45deg) scaleY(0);
                 width: 3px;
+                position: absolute;
+                left: 4px;
+                top: 1px;
+                transform: rotate(45deg) scaleY(1);
+      
                 transition: transform .15s ease-in .05s;
                 transform-origin: center;
             }
@@ -138,4 +139,5 @@ export default {
         color: #409eff;
     }
 }
+
 </style>

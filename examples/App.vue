@@ -1,33 +1,12 @@
 <template>
-  <div id="app" style="margin-left:400px">
-    <div class="row">
-      <c-button type="primary">按钮</c-button>
-      <c-button type="success">按钮</c-button>
-      <c-button type="info">按钮</c-button>
-      <c-button type="warning">按钮</c-button>
-      <c-button type="danger">按钮</c-button>
-    </div>
-    <c-carousel style="width: 300px;height:300px">
-      <c-carousel-item :key="1">
-        <img src="./assets/12.png" style="width: 300px;height:300px" />
-      </c-carousel-item>
-      <c-carousel-item :key="2">
-        <img src="./assets/logo.png" style="width: 300px;height:300px" />
-      </c-carousel-item>
-      <c-carousel-item :key="3">
-        <img src="./assets/2.jpg" style="width: 300px;height:300px" />
-      </c-carousel-item>
-    </c-carousel>
-    c
-    <!-- <c-dialog :visible="visible"></c-dialog> -->
+  <div id="app" style="margin:400px 0 0 200px;">
+    <c-magnifier>
+      ddd
+    </c-magnifier>
   </div>
 </template>
 
 <script>
-
-
-
-
 export default {
   name: "App",
 
@@ -63,7 +42,6 @@ export default {
   methods: {
     handleClick(val) {
       console.log(val)
-
     }
   },
 

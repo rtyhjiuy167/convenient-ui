@@ -1,9 +1,8 @@
 <template>
-<div>
+<div class="convenient-icon">
     <svg class="icon" aria-hidden="true">
     <use :xlink:href="iconName"></use>
   </svg>
- 
 </div>
 </template>
 
@@ -32,5 +31,8 @@ export default {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.convenient-icon{
+  display: inline-block;
 }
 </style>

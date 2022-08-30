@@ -18,7 +18,7 @@ npm i convenient-ui
 import Vue from 'vue'
 import App from './App.vue'
 
-import 'convenient-ui/lib/css/index.css' // 所有组件样式
+import 'convenient-ui/lib/index.css' // 所有组件样式
 import convenientUI from 'convenient-ui' // 所有组件
 
 Vue.config.productionTip = false
