@@ -28,6 +28,7 @@
 
 <script>
 import AsyncValidator from 'async-validator';
+import Vue from 'vue';
 
 export default {
     name: "CFormItem",
@@ -73,10 +74,12 @@ export default {
     },
     methods: {
         resetField() {
-            this.validateState = '';
-            this.validateMessage = '';
             let model = this.form.model;
-            if(this.prop)model[this.prop]=this.initialValue;
+            if(this.prop)model[this.prop] = this.initialValue;
+            Vue.nextTick(()=>{
+                this.validateState = '';
+                this.validateMessage = '';
+            })
         },
         getRules() {
             let formRules = this.form.rules;
@@ -87,7 +90,6 @@ export default {
         },
         getFilteredRule(trigger) {
             const rules = this.getRules();
-            console.log("11111111")
             return rules.filter(rule => {
                 if (!rule.trigger || !trigger) return true;
                 if (Array.isArray(rule.trigger)) {
@@ -228,6 +230,11 @@ export default {
 .right {
     height: 60px;
     display: flex;
+
+    .convenient-form-item__content {
+        display: inline-block;
+        flex: 1;
+    }
 
     .convenient-form-item__label {
         text-align: right !important;
