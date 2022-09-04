@@ -9,13 +9,13 @@ export default {
     name: 'CRadioGroup',
     provide() {
         return {
-            RadioGroup: this
+            RadioGroup: this,
         }
     },
     props: {
         value: null
     },
-    
 }
 </script>
-<style></style>
+<style>
+</style>

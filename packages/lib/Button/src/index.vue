@@ -1,6 +1,7 @@
 <template>
   <button class="convenient-button" :class="[
     `convenient-button--${type}`,
+    { 'is-slot': inputButtonSlot },
     { 'is-plain': plain },
     { 'is-round': round },
     { 'is-circle': circle },
@@ -18,6 +19,10 @@
 export default {
   name: 'CButton',
   props: {
+    inputButtonSlot: {
+      type: Boolean,
+      default: () => false
+    },
     type: {
       type: String,
       default: () => 'default'
@@ -82,11 +87,6 @@ $danger-active-color: #f78989;
   margin: 0;
   transition: 0.1s;
   font-weight: 500;
-  // 禁止文字被选中
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-
 
   &.large {
     padding: 12px 20px;
@@ -268,7 +268,6 @@ $danger-active-color: #f78989;
 
   &.small {
     padding: 8px 15px;
-
   }
 
   &.mini {
@@ -301,5 +300,11 @@ $danger-active-color: #f78989;
 .convenient-button.is-disabled {
   cursor: no-drop;
   opacity: 0.5;
+}
+
+.convenient-button.is-slot {
+  padding: 0 5px;
+  border: none;
+  border-radius: 0;
 }
 </style>

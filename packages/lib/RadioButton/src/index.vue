@@ -6,13 +6,12 @@
   { 'is-circle': circle },
   { 'is-active': active },
   { 'is-disabled': disabled }]" ref="button">
-
     <i v-if="icon" :class="`iconfont convenient-icon-${icon}`"></i>
     <span v-if="$slots.default">
       <slot />
     </span>
     <template v-else>
-      {{  label  }}
+      {{ label }}
     </template>
   </button>
 </template>
@@ -116,16 +115,26 @@ export default {
             this.$refs.button.style.backgroundColor = this.orginalInActiveColor;
           }
         }
-
       }
-
-
     }
   },
   mounted() {
     this.setSelfColor()
+    if(this.$el.nextSibling){
+      if(this.$el.nextSibling.nodeType === 3){
+        this.$el.nextSibling.remove()
+      }
+    }
+    if(this.$el.nextElementSibling){
+      this.$el.style.borderRight= 'none';
+      this.$el.style.borderTopRightRadius='0';
+      this.$el.style.borderBottomRightRadius='0';
+    }
+   if(this.$el.previousElementSibling){
+      this.$el.style.borderTopLeftRadius='0';
+      this.$el.style.borderBottomLeftRadius='0';
+   }
   },
-
   watch: {
     activeColor(newVal) {
       this.orginalActiveColor = newVal;
@@ -165,10 +174,6 @@ $danger-active-color: #f78989;
   margin: 0;
   transition: 0.1s;
   font-weight: 500;
-  // 禁止文字被选中
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
 
   padding: 12px 20px;
   font-size: 14px;

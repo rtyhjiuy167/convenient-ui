@@ -1,59 +1,42 @@
 <template>
-  <div id="app" style="margin:400px 0 0 200px;">
-    <c-magnifier>
-      ddd
-    </c-magnifier>
+  <div>
+    <c-radio-group v-model="labelPosition" size="small">
+      <c-radio-button label="left">左对齐</c-radio-button>c
+      <c-radio-button label="right">右对齐</c-radio-button>
+      <c-radio-button label="top">顶部对齐</c-radio-button>
+    </c-radio-group>
+    <div style="margin: 20px;">
+      <c-form :model="form"  :label-position="labelPosition" label-width="100px">
+        <c-form-item label="待填项一" prop="str1">
+          <c-input v-model="form.str1"></c-input>
+        </c-form-item>
+        <c-form-item label="待填项二" prop="str2">
+          <c-input v-model="form.str2"></c-input>
+        </c-form-item>
+        <c-form-item label="其它" prop="str3">
+          <c-input v-model="form.str3"></c-input>
+        </c-form-item>
+      </c-form>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
-
   data() {
     return {
-      visible: true,
-      input: "",
-      isChecked: false,
-      gender: "1",
-      groupGender: "1",
-      radioButton: 'a',
-      active: false,
-      index: ["1"],
-      slideData: [
-        {
-          id: 1,
-          title: '图片1',
-          bg: '#ff9900'
-        },
-        {
-          id: 2,
-          title: '图片2',
-          bg: '#ff8899'
-        },
-        {
-          id: 3,
-          title: '图片3',
-          bg: '#dddddd'
-        }
-      ]
-    };
-  },
-  methods: {
-    handleClick(val) {
-      console.log(val)
+      labelPosition: 'right',
+      form: {
+        str1: '',
+        str2: '',
+        str3: ''
+      },
     }
   },
-
 }
 </script>
 
 <style lang="scss" scoped>
-.row {
-  margin-bottom: 20px;
 
-  .convenient-button {
-    margin-right: 20px;
-  }
-}
 </style>

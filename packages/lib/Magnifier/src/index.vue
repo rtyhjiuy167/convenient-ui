@@ -1,16 +1,17 @@
 <template>
-  <div v-magnifier class="convenient-magnifier" :style="{
-    width: imgWidth + 'px',
-    height: imgHeight + 'px'
-  }">
+  <div class="convenient-magnifier" :style="{
+    width: contentWidth + 'px',
+    height: contentHeight + 'px'
+  }" ref="cMagnifier">
     <a class="convenient-magnifier__mag" :href="link" :target="blank ? '_blank' : ''"
-      :style="{ width: magWidth + 'px', height: magHeight + 'px' }">
+      :style="{ width: magWidth + 'px', height: magHeight + 'px' }" ref="mag">
       <template v-if="imgUrl">
         <img class="convenient-magnifier__mag__img" :src="imgUrl" :alt="imgAlt"
-          :style="{ width: imgWidth + 'px', height: imgHeight + 'px' }" />
+          :style="{ width: contentWidth + 'px', height: contentHeight + 'px' }" ref="img" />
       </template>
       <template v-else>
-        <div class="convenient-magnifier__mag__img">
+        <div class="convenient-magnifier__mag__img"
+          :style="{ width: contentWidth + 'px', height: contentHeight + 'px' }" ref="img">
           <slot />
         </div>
       </template>
@@ -29,12 +30,8 @@
 </template>
 
 <script>
-import { magnifier } from '../../../directives/index'
 export default {
   name: 'CMagnifier',
-  directives: {
-    magnifier
-  },
   props: {
     link: {
       type: String,
@@ -47,39 +44,96 @@ export default {
     imgUrl: {
       type: String,
     },
-    imgWidth: {
+    contentWidth: {
       type: Number,
       default: 300
     },
-    imgHeight: {
+    contentHeight: {
       type: Number,
       default: 300
     },
     magHeight: {
       type: Number,
-      default: 80
+      default: 60
     },
     magWidth: {
       type: Number,
-      default: 80
+      default: 60
     },
     imgAlt: {
       type: String,
       default: ''
-    }
+    },
+  },
+
+  mounted() {
+    this._cMagnifier = this.$refs.cMagnifier;
+    const { x, y } = this._cMagnifier.getBoundingClientRect()
+    this._x = x;
+    this._y = y;
+    this._mag = this.$refs.mag;
+    this._img = this.$refs.img;
+    this._cMagnifier.addEventListener('mouseenter', this.mouseenterHandler);
+    this.addMousemoveListener(this.mouseMoveHandler)
+    this._cMagnifier.addEventListener('mouseleave', this.mouseleaveHandler)
+  },
+  methods: {
+    mouseMoveHandler(e) {
+      if (!this._mag.classList.contains('show')) this._mag.classList.add('show');
+      this._mag.style.left = e.pageX - this._x - this.magWidth / 2 + 'px';
+      this._img.style.left = -(e.pageX - this._x - this.magWidth / 2) + 'px';
+      this._mag.style.top = e.pageY - this._y - this.magHeight / 2 + 'px';
+      this._img.style.top = -(e.pageY - this._y - this.magHeight / 2) + 'px';
+      if (e.pageX < this._x || e.pageX > (this._x + this.contentWidth) || e.pageY < this._y || e.pageY > (this._y + this.contentHeight)) {
+        this._mag.classList.remove('show');
+      }
+    },
+    mouseenterHandler(e) {
+      this._mag.classList.add('show');
+      this.mouseMoveHandler(e);
+    },
+    mouseleaveHandler() {
+      this._mag.classList.remove('show');
+    },
+
+    addMousemoveListener() {
+      const { _handleMouseMove } = this;
+      if (_handleMouseMove) return
+      this._cMagnifier.addEventListener('mousemove', this.mouseMoveHandler);
+      this._handleMouseMove = this.mouseMoveHandler;
+    },
+    removeMousemoveListener() {
+      const { _handleMouseMove } = this;
+      if (!_handleMouseMove) return
+      this._cMagnifier.removeEventListener('mousemove', this.mouseMoveHandler);
+      this._handleMouseMove = null;
+    },
+
+  },
+  beforeDestroy() {
+    this._cMagnifier.removeEventListener('mouseenter', this.mouseenterHandler);
+    this._cMagnifier.removeEventListener('mouseleave', this.mouseleaveHandler);
+    this.removeMousemoveListener();
+    this._x = null;
+    this._y = null;
+    this._cMagnifier = null;
+    this._mag = null;
+    this._img = null;
+
   },
 }
 </script>
 
 <style scoped lang='scss'>
 .convenient-magnifier {
+  box-sizing: border-box !important;
   position: relative;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px #999;
 
   a {
     cursor: default;
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
   }
 
@@ -105,10 +159,6 @@ export default {
       top: 0;
       left: 0;
     }
-
-
-
-
 
   }
 

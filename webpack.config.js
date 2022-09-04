@@ -41,7 +41,7 @@ module.exports = {
     library: '[name]',
     libraryTarget: 'umd',
     libraryExport: 'default',
-    assetModuleFilename: 'media/[contenthash:10][ext][query]',
+    assetModuleFilename: 'media/[hash:10][ext][query]',
     clean: true,
   },
   plugins: [
@@ -97,48 +97,45 @@ module.exports = {
             }
           ]
         },
+
         {
-          oneOf: [
+          test: /\.css$/,
+          use: getStyleLoader()
+        },
+        {
+          test: /\.s[ac]ss$/,
+          use: getStyleLoader("sass-loader"),
+        },
+        {
+          test: /\.(png|jpe?g|gif|webp|svg)$/i,
+          type: 'asset',
+          parser: {
+            dataUrlCondition: {
+              maxSize: 10 * 1024
+            }
+          },
+        },
+        {
+          test: /\.(ttf|woff2?|mp3|mp4|avi)$/i,
+          type: 'asset/resource',
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [
             {
-              test: /\.css$/,
-              use: getStyleLoader()
-            },
-            {
-              test: /\.s[ac]ss$/,
-              use: getStyleLoader("sass-loader"),
-            },
-            {
-              test: /\.(png|jpe?g|gif|webp|svg)$/i,
-              type: 'asset',
-              parser: {
-                dataUrlCondition: {
-                  maxSize: 10 * 1024
-                }
-              },
-            },
-            {
-              test: /\.(ttf|woff2?|mp3|mp4|avi)$/i,
-              type: 'asset/resource',
-            },
-            {
-              test: /\.js$/,
-              exclude: /node_modules/,
-              use: [
-                {
-                  loader: 'babel-loader',
-                  options: {
-                    // 开启缓存
-                    cacheDirectory: true,
-                    // 关闭缓存文件的压缩
-                    cacheCompression: false,
-                    // 减少 babel 代码体积
-                    plugins: [
-                      "@babel/plugin-transform-runtime"
-                    ]
-                  }
-                }
-              ]
-            },
+              loader: 'babel-loader',
+              options: {
+                // 开启缓存
+                cacheDirectory: true,
+                // 关闭缓存文件的压缩
+                cacheCompression: false,
+                // 减少 babel 代码体积
+                plugins: [
+                  "@babel/plugin-transform-runtime"
+                ]
+              }
+            }
           ]
         }
       ]

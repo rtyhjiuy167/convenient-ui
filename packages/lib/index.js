@@ -12,6 +12,10 @@ import Icon from './Icon'
 import Carousel from './Carousel'
 import CCarouselItem from './CarouselItem'
 import CMagnifier from './Magnifier'
+import CImage from './Image'
+import CFormItem from './FormItem'
+import CForm from './Form'
+import CInput from './Input'
 import '../iconfont.css'
 
 const components = [
@@ -27,7 +31,11 @@ const components = [
   Icon,
   Carousel,
   CCarouselItem,
-  CMagnifier
+  CMagnifier,
+  CImage,
+  CFormItem,
+  CForm,
+  CInput
 ];
 const optionsComponentsName = (optionsComponents) => {
   let map = {};
